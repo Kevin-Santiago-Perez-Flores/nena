@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jannelli Bello Pedraza</title>
+    
+    <link rel="icon" type="image/jpeg" href="icono.jpeg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #FF69B4;
+            --dark-pink: #E91E63;
+            --soft-peach: #FFDAB9;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--soft-peach) 0%, #FFC0CB 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart-rain-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .app-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 10;
+            max-height: 85vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .app-container {
+                max-width: 600px;
+                padding: 40px;
+            }
+        }
+
+        .app-container::-webkit-scrollbar { display: none; }
+
+        .screen { display: none; animation: fadeIn 0.5s ease-in-out; width: 100%; }
+        .screen.active { display: flex; flex-direction: column; align-items: center; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 { font-family: 'Pacifico', cursive; color: var(--dark-pink); font-size: 1.8rem; margin: 15px 0; }
+        h2 { color: #d63384; font-size: 1.5rem; margin-bottom: 15px; }
+        p { color: #555; font-size: 1rem; line-height: 1.6; }
+
+        .button-group { display: flex; flex-direction: column; width: 100%; gap: 12px; margin-top: 20px; }
+
+        .button {
+            background-color: var(--primary-pink);
+            color: white; border: none; padding: 16px;
+            border-radius: 50px; font-size: 1rem;
+            font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%;
+        }
+
+        .button:hover { background-color: var(--dark-pink); transform: translateY(-2px); }
+        .button:active { transform: scale(0.95); }
+        .back-button { background-color: #9C27B0; margin-top: 20px; margin-bottom: 10px; }
+
+        .snoopy-img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 8px 8px 20px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            width: 65%;
+            box-sizing: border-box;
+            transition: transform 0.3s;
+        }
+
+        .polaroid:hover { transform: scale(1.05) !important; z-index: 20; }
+
+        .polaroid.align-left { align-self: flex-start; margin-left: 2%; }
+        .polaroid.align-right { align-self: flex-end; margin-right: 2%; }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .poem-text {
+            font-style: italic;
+            background: rgba(255,105,180,0.08);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 10px 0;
+            color: #444;
+            line-height: 1.8;
+            border-left: 4px solid var(--primary-pink);
+        }
+
+        .intro-heart { font-size: 50px; animation: beat 1.2s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+        .video-container {
+            width: 100%; aspect-ratio: 16 / 9;
+            margin-top: 15px; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .video-container iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="heart-rain-container" id="heart-rain"></div>
+
+    <div class="app-container" id="mainContainer">
+        
+        <div id="homeScreen" class="screen active">
+            <div class="intro-heart">💖</div>
+            <h1>Hola, mi nena hermosa</h1>
+            <p>Este rincón es solo para ti<br><b>Jannelli Bello Pedraza</b></p>
+            <div class="button-group">
+                <button class="button" onclick="showScreen('messageScreen')">💌 Mi Mensaje</button>
+                <button class="button" onclick="showScreen('photoScreen')">📸 Nuestros Momentos</button>
+                <button class="button" onclick="showScreen('poemScreen')">📖 Un Poema</button>
+                <button class="button" onclick="showScreen('musicScreen')">🎵 Nuestra Canción</button>
+            </div>
+        </div>
+
+        <div id="messageScreen" class="screen">
+            <h2>Mi Mensaje</h2>
+            <img src="snoopy.png" alt="Snoopy" class="snoopy-img">
+            <p>Hola, amor de mi vida. Quise hacer algo diferente porque, aunque nos separen unos kilómetros, mi corazón no sabe de distancias cuando se trata de ti.</p>
+            <p>Gracias por ser tú, por tu paciencia y por todo ese cariño. Te amo con cada fibra de mi ser, mi nena hermosa.</p>
+            <button class="button back-button" onclick="showScreen('homeScreen')">Volver</button>
+        </div>
+
+        <div id="photoScreen" class="screen">
+            <h2>Nuestros Momentos</h2>
+            <div class="photo-gallery" id="gallery"></div>
+            <button class="button back-button" onclick="showScreen('homeScreen')">Volver</button>
+        </div>
+
+        <div id="poemScreen" class="screen">
+            <h2>La Brújula de mis Días</h2>
+            <div class="poem-text">
+                Si el mundo fuera un mapa sin orillas,<br>
+                y yo un viajero en busca de una estrella,<br>
+                me bastaría seguir tus huellas amarillas,<br>
+                pues no hay ruta en la vida más bella.<br><br>
+                Hay quien busca tesoros en la arena,<br>
+                o quien quiere el cielo en un frasco de cristal;<br>
+                yo solo busco el alma que me llena,<br>
+                tu risa que me cura cualquier mal.<br><br>
+                Porque amarte no es solo un momento,<br>
+                ni un sentimiento que el viento se llevó;<br>
+                es grabarte en cada pensamiento,<br>
+                y ser la historia que el destino nos escribió.
+            </div>
+            <button class="button back-button" onclick="showScreen('homeScreen')">Volver</button>
+        </div>
+
+        <div id="musicScreen" class="screen">
+            <h2>Nuestra Canción</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/6W4L2O-JQ-w" allowfullscreen></iframe>
+            </div>
+            <button class="button back-button" onclick="showScreen('homeScreen')">Volver</button>
+        </div>
+
+    </div>
+
+    <script>
+        const gallery = document.getElementById('gallery');
+
+        function createPolaroid(src, alt, rotation, alignClass) {
+            const photoDiv = document.createElement('div');
+            photoDiv.className = `polaroid ${alignClass}`;
+            photoDiv.style.transform = `rotate(${rotation}deg)`;
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = alt;
+            photoDiv.appendChild(img);
+            return photoDiv;
+        }
+
+        // Icono al inicio
+        gallery.appendChild(createPolaroid('icono.jpeg', 'Nuestro Icono', -3, 'align-left'));
+
+        // Fotos 1 a 26 salteadas
+        for (let i = 1; i <= 26; i++) {
+            const align = (i % 2 === 0) ? 'align-left' : 'align-right';
+            const rot = (i % 2 === 0) ? (Math.random() * -5 - 2) : (Math.random() * 5 + 2);
+            gallery.appendChild(createPolaroid(`${i}.jpeg`, `Momento ${i}`, rot, align));
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            document.getElementById('mainContainer').scrollTop = 0;
+        }
+
+        const heartRainContainer = document.getElementById('heart-rain');
+        function createHeart() {
+            const heart = document.createElement('div');
+            const hearts = ['💖', '❤️', '🌸', '✨', '💕'];
+            heart.classList.add('floating-heart');
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+            heartRainContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
